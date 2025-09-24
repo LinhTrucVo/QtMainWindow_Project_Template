@@ -47,3 +47,4 @@ cmake --build .
 #set PATH to qt bin before deploy (example - C:/Qt/6.9.1/mingw_64/bin)
 windeployqt src/.
 ```
+<img width="267" height="182" alt="image" src="https://github.com/user-attachments/assets/1ff44df0-d6a1-4413-9d37-5b907d91ca37" />
