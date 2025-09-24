@@ -51,7 +51,7 @@ uint8_t Task_1::MainTask()
     qDebug() << QString("Hello from ") + objectName();
     qDebug() << "Num of running thread: " << getThreadHash().count();
     qDebug() << "Num of running ui thread: " << Bico_QWindowThread_UI::getUIThreadHash().count();
-    msleep(100);
+    msleep(1000);
 
     if ((objectName() == "task_1") && (getThreadHash().value("task_0") != nullptr))
     {
@@ -59,7 +59,7 @@ uint8_t Task_1::MainTask()
         Bico_QMessData mess_data("from_another_thread", i++);
         mess_data.setSrc(objectName());
         getThreadHash().value("task_0")->qinEnqueue(mess_data);
-        msleep(236);
+        msleep(2365);
     }
 
     qDebug() << Qt::endl;
