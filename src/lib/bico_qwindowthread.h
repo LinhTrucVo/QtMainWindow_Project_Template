@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <QHash>
 
-#include "../Template_Material/Common/bico_qthread.h"
+#include "bico_qthread.h"
 #include "bico_qwindowthread_ui.h"
 
 class Bico_QWindowThread_UI;

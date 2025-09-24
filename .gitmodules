@@ -1,0 +1,3 @@
+[submodule "src/lib/QtLib_Project_Template"]
+	path = src/lib/QtLib_Project_Template
+	url = https://github.com/LinhTrucVo/QtLib_Project_Template

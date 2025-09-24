@@ -1,27 +1,27 @@
-#ifndef BICO_QWINDOWTHREAD_SAMPLE_UI_H
-#define BICO_QWINDOWTHREAD_SAMPLE_UI_H
+#ifndef TASK_1_UI_H
+#define TASK_1_UI_H
 
 #include <QMainWindow>
 #include <QCloseEvent>
 
-#include "../../Template_Material/bico_qwindowthread_ui.h"
-#include "Bico_QWindowThread_Sample.h"
-#include "ui_Bico_QWindowThread_Sample_UI.h"
+#include "bico_qwindowthread_ui.h"
+#include "Task_1.h"
+#include "ui_Task_1_UI.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Bico_QWindowThread_Sample_UI; }
+namespace Ui { class Task_1_UI; }
 QT_END_NAMESPACE
 
-class Bico_QWindowThread_Sample_UI : public Bico_QWindowThread_UI
+class Task_1_UI : public Bico_QWindowThread_UI
 {
     Q_OBJECT
 
 public:
-    Bico_QWindowThread_Sample_UI
+    Task_1_UI
     (
         QString obj_name, Bico_QWindowThread* thread, 
         QWidget* parent
-    ) : Bico_QWindowThread_UI(obj_name, thread, parent), ui(new Ui::Bico_QWindowThread_Sample_UI)
+    ) : Bico_QWindowThread_UI(obj_name, thread, parent), ui(new Ui::Task_1_UI)
     {
         ui->setupUi(this);
         moreUISetup();
@@ -31,7 +31,7 @@ public:
     void fromThreadHandling(QString mess, QVariant data);
 
 private:
-    Ui::Bico_QWindowThread_Sample_UI *ui;
+    Ui::Task_1_UI *ui;
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -40,4 +40,4 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
 };
-#endif // BICO_QWINDOWTHREAD_SAMPLE_UI_H
+#endif // TASK_1_UI_H

@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     Task_1_UI* ui = Bico_QWindowThread_UI::createNew<Task_1_UI>
         (
             "task_0",
-            Bico_QWindowThread::createNew<Task_1>
+            Bico_QWindowThread::createNew<Bico_QWindowThread_Sample>
             (
                 new Bico_DataQueue,
                 1,
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     Task_1_UI* ui1 = Bico_QWindowThread_UI::createNew<Task_1_UI>
         (
             "task_1",
-            Bico_QWindowThread::createNew<Task_1>
+            Bico_QWindowThread::createNew<Bico_QWindowThread_Sample>
             (
                 new Bico_DataQueue,
                 1,
