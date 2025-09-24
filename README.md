@@ -1,3 +1,44 @@
+## Getting Started
+
+### Clone the Repository
+
+To clone this repository with all submodules:
+
+```bash
+git clone --recurse-submodules https://github.com/LinhTrucVo/QtMainWindow_Project_Template.git
+cd QtMainWindow_Project_Template
+```
+
+If you already cloned the repository without submodules, initialize them:
+
+```bash
+git submodule update --init --recursive
+```
+or update them:
+
+```bash
+git submodule update --remote --recursive
+```
+
+After update submodule:
+
+```bash
+git add src/QtLib_Project_Template
+git commit -m "updare submodule"
+git push
+```
+
+## Submodules
+
+This project uses the following submodules:
+
+- **QtLib_Project_Template**: Core PyQt threading and messaging library
+  - Repository: https://github.com/LinhTrucVo/QtLib_Project_Template.git
+  - Path: `src/QtLib_Project_Template`
+
+
+## Deploy 
+
 ```bash
 mkdir build
 cd build
