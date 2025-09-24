@@ -14,6 +14,7 @@ If you already cloned the repository without submodules, initialize them:
 ```bash
 git submodule update --init --recursive
 ```
+
 or update them:
 
 ```bash
@@ -23,7 +24,7 @@ git submodule update --remote --recursive
 After update submodule:
 
 ```bash
-git add src/QtLib_Project_Template
+git add src/lib/QtLib_Project_Template
 git commit -m "updare submodule"
 git push
 ```
@@ -36,8 +37,7 @@ This project uses the following submodules:
   - Repository: https://github.com/LinhTrucVo/QtLib_Project_Template.git
   - Path: `src/QtLib_Project_Template`
 
-
-## Deploy 
+## Deploy
 
 ```bash
 mkdir build
