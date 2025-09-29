@@ -63,9 +63,9 @@ uint8_t Task_1::MainTask()
     }
 
     qDebug() << Qt::endl;
-    // Default work - begin --------------------------------------------------------------
-    // This block of code is to test the remove method
+    // Default work - end--------------------------------------------------------------
 
+    // This block of code is to test the remove method
     // Test the remove method - begin --------------------------------------------------------------
     // if (objectName() == "task_0")
     // {
