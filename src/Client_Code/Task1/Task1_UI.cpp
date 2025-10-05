@@ -1,13 +1,13 @@
-#include "Bico_QWindowThread_Sample_UI.h"
+#include "Task1_UI.h"
 
-void Bico_QWindowThread_Sample_UI::moreUISetup()
+void Task1_UI::moreUISetup()
 {
     // more setting up when the ui started
     
     ui->pushButton->resize(QSize(100, 50));
 }
 
-void Bico_QWindowThread_Sample_UI::fromThreadHandling(QString mess, QVariant data)
+void Task1_UI::fromThreadHandling(QString mess, QVariant data)
 {
     if(mess == "show")
     {
@@ -32,18 +32,18 @@ void Bico_QWindowThread_Sample_UI::fromThreadHandling(QString mess, QVariant dat
 
 
 // Send data to thread thread
-void Bico_QWindowThread_Sample_UI::on_pushButton_clicked()
+void Task1_UI::on_pushButton_clicked()
 {
     emit toThread("mess_from_ui", "button_clicked");
 }
 
 
-void Bico_QWindowThread_Sample_UI::on_pushButton_2_clicked()
+void Task1_UI::on_pushButton_2_clicked()
 {
     emit toThread("1", "111");
 }
 
-void Bico_QWindowThread_Sample_UI::on_pushButton_3_clicked()
+void Task1_UI::on_pushButton_3_clicked()
 {
     emit toThread("2", "222");
 }

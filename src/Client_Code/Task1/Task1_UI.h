@@ -1,27 +1,27 @@
-#ifndef TASK_1_UI_H
-#define TASK_1_UI_H
+#ifndef TASK1_UI_H
+#define TASK1_UI_H
 
 #include <QMainWindow>
 #include <QCloseEvent>
 
 #include "bico_qwindowthread_ui.h"
-#include "Task_1.h"
-#include "ui_Task_1_UI.h"
+#include "Task1.h"
+#include "ui_Task1_UI.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Task_1_UI; }
+namespace Ui { class Task1_UI; }
 QT_END_NAMESPACE
 
-class Task_1_UI : public Bico_QWindowThread_UI
+class Task1_UI : public Bico_QWindowThread_UI
 {
     Q_OBJECT
 
 public:
-    Task_1_UI
+    Task1_UI
     (
         QString obj_name, Bico_QWindowThread* thread, 
         QWidget* parent
-    ) : Bico_QWindowThread_UI(obj_name, thread, parent), ui(new Ui::Task_1_UI)
+    ) : Bico_QWindowThread_UI(obj_name, thread, parent), ui(new Ui::Task1_UI)
     {
         ui->setupUi(this);
         moreUISetup();
@@ -31,7 +31,7 @@ public:
     void fromThreadHandling(QString mess, QVariant data);
 
 private:
-    Ui::Task_1_UI *ui;
+    Ui::Task1_UI *ui;
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -40,4 +40,4 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
 };
-#endif // TASK_1_UI_H
+#endif // TASK1_UI_H

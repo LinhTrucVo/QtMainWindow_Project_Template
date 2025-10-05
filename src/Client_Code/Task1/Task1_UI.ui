@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Bico_QWindowThread_Sample_UI</class>
- <widget class="QMainWindow" name="Bico_QWindowThread_Sample_UI">
+ <class>Task1_UI</class>
+ <widget class="QMainWindow" name="Task1_UI">
   <property name="geometry">
    <rect>
     <x>0</x>

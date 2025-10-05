@@ -1,19 +1,19 @@
-#ifndef BICO_QWINDOWTHREAD_SAMPLE_H
-#define BICO_QWINDOWTHREAD_SAMPLE_H
+#ifndef TASK1_H
+#define TASK1_H
 
 #include <QtDebug>
 
 #include "bico_qwindowthread.h"
-#include "Bico_QWindowThread_Sample_UI.h"
-#include "Data_Object/Bico_QWindowThread_Sample_Data.h"
+#include "Task1_UI.h"
+#include "Data_Object/Task1_Data.h"
 
 
-class Bico_QWindowThread_Sample : public Bico_QWindowThread
+class Task1 : public Bico_QWindowThread
 {
     Q_OBJECT
 
 public:
-    Bico_QWindowThread_Sample
+    Task1
     (
         Bico_DataQueue *qin, 
         uint8_t qin_owner, 
@@ -28,7 +28,7 @@ public:
     virtual uint8_t MainTask();
 
 private:
-    Bico_QWindowThread_Sample_Data ex_data_obj;
+    Task1_Data ex_data_obj;
 };
 
-#endif // BICO_QWINDOWTHREAD_SAMPLE_H
+#endif // TASK1_H

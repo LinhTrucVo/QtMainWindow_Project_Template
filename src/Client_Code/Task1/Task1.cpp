@@ -2,10 +2,10 @@
 #include <QJsonDocument>
 #include <QRandomGenerator>
 
-#include "Bico_QWindowThread_Sample.h"
+#include "Task1.h"
 
 
-uint8_t Bico_QWindowThread_Sample::MainTask()
+uint8_t Task1::MainTask()
 {
     // continue_to_run is used to terminate the thread by reset it to 0
     uint8_t continue_to_run = 1;

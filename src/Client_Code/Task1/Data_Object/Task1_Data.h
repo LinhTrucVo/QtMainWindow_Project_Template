@@ -1,10 +1,10 @@
-#ifndef TASK_1_DATA_H
-#define TASK_1_DATA_H
+#ifndef TASK1_DATA_H
+#define TASK1_DATA_H
 
-class Task_1_Data
+class Task1_Data
 {
 public:
-    Task_1_Data();
+    Task1_Data();
     
 
     int getData_1() const;
@@ -18,4 +18,4 @@ private:
     float data_2;
 };
 
-#endif // TASK_1_H
+#endif // TASK1_H

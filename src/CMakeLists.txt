@@ -1,41 +1,18 @@
-cmake_minimum_required(VERSION 3.19)
-
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
-
-qt_standard_project_setup()
+include(Client_Code/Task1/Task1_Paths.cmake)
 
 qt_add_executable(QMainWindow_Project
     WIN32 MACOSX_BUNDLE
     # Common Section - begin ----------------------------
-    lib/QtLib_Project_Template/src/bico_qthread.h
     lib/QtLib_Project_Template/src/bico_qthread.cpp
-    lib/QtLib_Project_Template/src/bico_qmessdata.h
     lib/QtLib_Project_Template/src/bico_qmessdata.cpp
-    lib/QtLib_Project_Template/src/bico_qmutexqueue.h
     lib/bico_qwindowthread_ui.cpp
-    lib/bico_qwindowthread_ui.h
     lib/bico_qwindowthread.cpp
-    lib/bico_qwindowthread.h
     # Common Section - end ----------------------------
-
-    # Specific Section - begin ----------------------------
+    
     main.cpp
 
-    Client_Code/Bico_QWindowThread_Sample/Bico_QWindowThread_Sample_UI.cpp
-    Client_Code/Bico_QWindowThread_Sample/Bico_QWindowThread_Sample_UI.h
-    Client_Code/Bico_QWindowThread_Sample/Bico_QWindowThread_Sample.cpp
-    Client_Code/Bico_QWindowThread_Sample/Bico_QWindowThread_Sample.h
-    Client_Code/Bico_QWindowThread_Sample/Bico_QWindowThread_Sample_UI.ui
-    Client_Code/Bico_QWindowThread_Sample/Data_Object/Bico_QWindowThread_Sample_Data.cpp
-    Client_Code/Bico_QWindowThread_Sample/Data_Object/Bico_QWindowThread_Sample_Data.h
-
-    Client_Code/Task_1/Task_1_UI.cpp
-    Client_Code/Task_1/Task_1_UI.h
-    Client_Code/Task_1/Task_1.cpp
-    Client_Code/Task_1/Task_1.h
-    Client_Code/Task_1/Task_1_UI.ui
-    Client_Code/Task_1/Data_Object/Task_1_Data.cpp
-    Client_Code/Task_1/Data_Object/Task_1_Data.h
+    # Specific Section - begin ----------------------------
+    ${TASK1_SOURCE_FILES}
     # Specific Section - end ----------------------------
 )
 
@@ -47,10 +24,26 @@ target_include_directories(QMainWindow_Project
         # Common Section - end ----------------------------
         
         # Specific Section - begin ----------------------------
-        Client_Code/Task_1
-        Client_Code/Bico_QWindowThread_Sample
+        ${TASK1_INCLUDE_DIRS}
         # Specific Section - end ----------------------------
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 target_link_libraries(QMainWindow_Project
     PRIVATE

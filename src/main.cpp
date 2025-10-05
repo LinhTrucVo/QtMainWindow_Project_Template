@@ -1,7 +1,6 @@
 #include <QApplication>
 
-#include "Client_Code/Bico_QWindowThread_Sample/Bico_QWindowThread_Sample_UI.h"
-#include "Client_Code/Task_1/Task_1_UI.h"
+#include "Client_Code/Task1/Task1_UI.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,57 +9,25 @@ int main(int argc, char *argv[])
 
     Bico_QWindowThread::setMainApp(&app);
 
-// -----------------------------------------------------------------------------------------------------------------------------------------------
-     Bico_QWindowThread_Sample_UI* ui = Bico_QWindowThread_UI::createNew<Bico_QWindowThread_Sample_UI>
-             (
-                 "task_0",
-                 Bico_QWindowThread::createNew<Bico_QWindowThread_Sample>
-                 (
-                     new Bico_DataQueue,
-                     1,
-                     new Bico_DataQueue,
-                     1,
-                     "task_0"
-                 )
-             );
-
-     Bico_QWindowThread_Sample_UI* ui1 = Bico_QWindowThread_UI::createNew<Bico_QWindowThread_Sample_UI>
-             (
-                 "task_1",
-                 Bico_QWindowThread::createNew<Bico_QWindowThread_Sample>
-                 (
-                     new Bico_DataQueue,
-                     1,
-                     new Bico_DataQueue,
-                     1,
-                     "task_1"
-                 )
-             );
-
-     ui->show();
-     ui1->show();
-
-// -----------------------------------------------------------------------------------------------------------------------------------------------
-
-
 // // -----------------------------------------------------------------------------------------------------------------------------------------------
-//     Task_1_UI* ui = Bico_QWindowThread_UI::createNew<Task_1_UI>
-//         (
-//             "task_0",
-//             Bico_QWindowThread::createNew<Bico_QWindowThread_Sample>
-//             (
-//                 new Bico_DataQueue,
-//                 1,
-//                 new Bico_DataQueue,
-//                 1,
-//                 "task_0"
-//                 )
-//             );
+    Task1_UI* ui = Bico_QWindowThread_UI::createNew<Task1_UI>
+        (
+            "task_0",
+            Bico_QWindowThread::createNew<Task1>
+            (
+                new Bico_DataQueue,
+                1,
+                new Bico_DataQueue,
+                1,
+                "task_0"
+                )
+            );
+    ui->show();
 
-//     Task_1_UI* ui1 = Bico_QWindowThread_UI::createNew<Task_1_UI>
+//     Task1_UI* ui1 = Bico_QWindowThread_UI::createNew<Task1_UI>
 //         (
 //             "task_1",
-//             Bico_QWindowThread::createNew<Bico_QWindowThread_Sample>
+//             Bico_QWindowThread::createNew<Task1>
 //             (
 //                 new Bico_DataQueue,
 //                 1,
@@ -70,32 +37,31 @@ int main(int argc, char *argv[])
 //                 )
 //             );
 
-//     ui->show();
 //     ui1->show();
 
 // // -----------------------------------------------------------------------------------------------------------------------------------------------
 
-//    Bico_QWindowThread_Sample* thread = Bico_QWindowThread_Sample::createNew<Bico_QWindowThread_Sample>
+//    Task1* thread = Task1::createNew<Task1>
 //            (
 //                new Bico_DataQueue,
 //                1,
 //                new Bico_DataQueue,
 //                1,
 //                "task_0",
-//                Bico_QWindowThread_Sample_UI::createNew<Bico_QWindowThread_Sample_UI>("task_0")
+//                Task1_UI::createNew<Task1_UI>("task_0")
 //            );
+//    thread->start();
 
-//    Bico_QWindowThread_Sample* thread1 = Bico_QWindowThread_Sample::createNew<Bico_QWindowThread_Sample>
+//    Task1* thread1 = Task1::createNew<Task1>
 //            (
 //                new Bico_DataQueue,
 //                1,
 //                new Bico_DataQueue,
 //                1,
 //                "task_1",
-//                Bico_QWindowThread_Sample_UI::createNew<Bico_QWindowThread_Sample_UI>("task_1")
+//                Task1_UI::createNew<Task1_UI>("task_1")
 //            );
 
-//    thread->start();
 //    thread1->start();
 // -----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -104,18 +70,18 @@ int main(int argc, char *argv[])
 
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------
-//    Bico_QWindowThread_Sample_UI* ui = Bico_QWindowThread_Sample_UI::createNew<Bico_QWindowThread_Sample_UI>("task_0");
-//    Bico_QWindowThread_Sample_UI* ui1 = Bico_QWindowThread_Sample_UI::createNew<Bico_QWindowThread_Sample_UI>("task_1");
-
+//    Task1_UI* ui = Task1_UI::createNew<Task1_UI>("task_0");
 //    ui->show();
+
+//    Task1_UI* ui1 = Task1_UI::createNew<Task1_UI>("task_1");
 //    ui1->show();
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------
 
-//   Bico_QWindowThread_Sample* thread = Bico_QWindowThread_Sample::createNew<Bico_QWindowThread_Sample>(new Bico_DataQueue, 1, new Bico_DataQueue, 1, "task_0");
-//   Bico_QWindowThread_Sample* thread1 = Bico_QWindowThread_Sample::createNew<Bico_QWindowThread_Sample>(new Bico_DataQueue, 1, new Bico_DataQueue, 1, "task_1");
-
+//   Task1* thread = Task1::createNew<Task1>(new Bico_DataQueue, 1, new Bico_DataQueue, 1, "task_0");
 //   thread->start();
+
+//   Task1* thread1 = Task1::createNew<Task1>(new Bico_DataQueue, 1, new Bico_DataQueue, 1, "task_1");
 //   thread1->start();
 // -----------------------------------------------------------------------------------------------------------------------------------------------
 
