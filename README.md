@@ -1,5 +1,10 @@
 ## Getting Started
 
+Optional: install Qt6 in linux using package manager
+```bash
+apt install build-essential qt6-base-dev qt6-declarative-dev qt6-tools-dev qt6-qmltooling-plugins
+```
+
 ### Clone the Repository
 
 To clone this repository with all submodules:
