@@ -3,6 +3,7 @@ project(QMainWindow_Project LANGUAGES C CXX)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 # qt_standard_project_setup()
 
 # Add the src subdirectory which contains the main CMakeLists.txt
