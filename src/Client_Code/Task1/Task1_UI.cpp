@@ -1,5 +1,12 @@
 #include "Task1_UI.h"
 
+void Task1_UI::closeEvent(QCloseEvent *event)
+{
+    // Handle the window close event by requesting thread termination
+    event->ignore();
+    emit toThread("terminate", "");
+}
+
 void Task1_UI::moreUISetup()
 {
     // more setting up when the ui started
@@ -19,7 +26,8 @@ void Task1_UI::fromThreadHandling(QString mess, QVariant data)
     }
     else if (mess == "terminate")
     {
-        TERMINATE;
+        // Close the window when thread terminates
+        close();
     }
     else if(mess == "change_button_text")
     {
@@ -34,16 +42,17 @@ void Task1_UI::fromThreadHandling(QString mess, QVariant data)
 // Send data to thread thread
 void Task1_UI::on_pushButton_clicked()
 {
+    qDebug() << "Task1_UI: Button clicked, sending message to thread.";
     emit toThread("mess_from_ui", "button_clicked");
 }
 
 
 void Task1_UI::on_pushButton_2_clicked()
 {
-    emit toThread("1", "111");
+    emit toThread("create", "");
 }
 
 void Task1_UI::on_pushButton_3_clicked()
 {
-    emit toThread("2", "222");
+    emit toThread("create_child", "");
 }

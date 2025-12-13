@@ -26,9 +26,11 @@ public:
     {}
 
     virtual uint8_t MainTask();
+    void cleanupChildren();
 
 private:
     Task1_Data ex_data_obj;
+    static int count;  // Counter for thread naming
 };
 
 #endif // TASK1_H

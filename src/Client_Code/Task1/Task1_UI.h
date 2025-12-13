@@ -30,6 +30,9 @@ public:
     void moreUISetup();
     void fromThreadHandling(QString mess, QVariant data);
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private:
     Ui::Task1_UI *ui;
 

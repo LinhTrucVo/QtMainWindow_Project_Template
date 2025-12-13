@@ -8,21 +8,25 @@ int main(int argc, char *argv[])
     app.setQuitOnLastWindowClosed(false);
 
     Bico_QWindowThread::setMainApp(&app);
+    
+    // Initialize factories in main thread to ensure thread safety
+    Bico_QWindowThread::initializeFactories();
+    Bico_QWindowThread_UI::initializeFactory();
 
 // // -----------------------------------------------------------------------------------------------------------------------------------------------
-    Task1_UI* ui = Bico_QWindowThread_UI::createNew<Task1_UI>
-        (
-            "task_0",
-            Bico_QWindowThread::createNew<Task1>
-            (
-                new Bico_DataQueue,
-                1,
-                new Bico_DataQueue,
-                1,
-                "task_0"
-                )
-            );
-    ui->show();
+    // Task1_UI* ui = Bico_QWindowThread_UI::createNew<Task1_UI>
+    //     (
+    //         "task_0",
+    //         Bico_QWindowThread::createNew<Task1>
+    //         (
+    //             new Bico_DataQueue,
+    //             1,
+    //             new Bico_DataQueue,
+    //             1,
+    //             "task_0"
+    //             )
+    //         );
+    // ui->show();
 
 //     Task1_UI* ui1 = Bico_QWindowThread_UI::createNew<Task1_UI>
 //         (
@@ -41,16 +45,16 @@ int main(int argc, char *argv[])
 
 // // -----------------------------------------------------------------------------------------------------------------------------------------------
 
-//    Task1* thread = Task1::createNew<Task1>
-//            (
-//                new Bico_DataQueue,
-//                1,
-//                new Bico_DataQueue,
-//                1,
-//                "task_0",
-//                Task1_UI::createNew<Task1_UI>("task_0")
-//            );
-//    thread->start();
+   Task1* thread = Bico_QWindowThread::createNew<Task1>
+           (
+               new Bico_DataQueue,
+               1,
+               new Bico_DataQueue,
+               1,
+               "task_0",
+               Bico_QWindowThread_UI::createNew<Task1_UI>("task_0")
+           );
+   Bico_QWindowThread::getThreadHash().value("task_0")->start();
 
 //    Task1* thread1 = Task1::createNew<Task1>
 //            (
