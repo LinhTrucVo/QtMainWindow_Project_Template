@@ -120,7 +120,7 @@ uint8_t Task1::MainTask()
     qDebug() << QString("Hello from ") + objectName();
     qDebug() << "Num of running thread: " << getThreadHash().count();
     qDebug() << "Num of running ui thread: " << Bico_QWindowThread_UI::getUIThreadHash().count();
-    msleep(1000);
+    msleep(100);
 
     if ((objectName() == "task_1") && (getThreadHash().value("task_0") != nullptr))
     {

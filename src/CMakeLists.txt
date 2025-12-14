@@ -1,7 +1,6 @@
 include(Client_Code/Task1/Task1_Paths.cmake)
 
 qt_add_executable(QMainWindow_Project
-    WIN32 MACOSX_BUNDLE
     # Common Section - begin ----------------------------
     lib/QtLib_Project_Template/src/bico_qthread.cpp
     lib/QtLib_Project_Template/src/bico_qmessdata.cpp
@@ -50,6 +49,20 @@ target_link_libraries(QMainWindow_Project
         Qt::Core
         Qt::Widgets
 )
+
+# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
+# If you are developing for iOS or macOS you should consider setting an
+# explicit, fixed bundle identifier manually though.
+# By enable below properties, the application
+# will be created as a GUI application on Windows and macOS,
+# without a console window.
+# set_target_properties(QMainWindow_Project PROPERTIES
+#     MACOSX_BUNDLE TRUE
+#     WIN32_EXECUTABLE TRUE
+#     MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
+#     MACOSX_BUNDLE_SHORT_VERSION_STRING
+#         "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}"
+# )
 
 include(GNUInstallDirs)
 
