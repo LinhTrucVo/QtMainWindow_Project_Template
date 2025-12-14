@@ -11,8 +11,6 @@
 #include <QMutex>
 #include <functional>
 
-#define UI_NAME_PREFIX QString("ui_")
-
 // Forward declarations only - avoid circular include
 class Bico_QWindowThread;
 class Bico_QWindowThread_UI;
@@ -53,7 +51,6 @@ public:
     ~Bico_QWindowThread_UI();
 
     void show();
-    void closeEvent(QCloseEvent *event);
 
     // This method is implemented by subclass
     virtual void fromThreadHandling(QString mess, QVariant data) = 0;
@@ -64,7 +61,7 @@ public:
     template<typename T>
     static T* createNew(QString obj_name = "", Bico_QWindowThread* thread = nullptr, QWidget* parent = nullptr)
     {
-        if (ui_thread_hash.find(UI_NAME_PREFIX + obj_name) == ui_thread_hash.end())
+        if (ui_thread_hash.find(obj_name) == ui_thread_hash.end())
         {
             // Check if we're in the main thread
             QThread* main_thread = QCoreApplication::instance()->thread();
@@ -119,6 +116,9 @@ protected:
     static QMutex ui_thread_hash_mutex;
     static UIFactory_UI* ui_factory;
     Bico_QWindowThread* _thread;
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 signals:
     void toThread(QString mess, QVariant data);
