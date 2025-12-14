@@ -65,12 +65,6 @@ Bico_QWindowThread::Bico_QWindowThread
     : QThread(parent), Bico_QThread(qin, qin_owner, qout, qout_owner)
 {
     setObjectName(obj_name);
-
-    int thread_check = 5;
-    // Check if we're in the main thread
-    QThread* main_thread = QCoreApplication::instance()->thread();
-    QThread* current_thread = QThread::currentThread();
-    thread_check = (current_thread == main_thread);
             
     thread_hash_mutex.lock();
     thread_hash.insert(obj_name, this);
@@ -138,8 +132,6 @@ void Bico_QWindowThread::run()
     {
 
     } while (MainTask());
-
-    deleteLater();
 }
 
 

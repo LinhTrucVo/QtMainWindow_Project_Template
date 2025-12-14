@@ -11,12 +11,6 @@ void UIFactory_UI::createUI()
 {
     if (pending_params == nullptr)
         return;
-
-    int thread_check = 5;
-    // Check if we're in the main thread
-    QThread* main_thread = QCoreApplication::instance()->thread();
-    QThread* current_thread = QThread::currentThread();
-    thread_check = (current_thread == main_thread);
     
     // Create UI directly (we're already in main thread)
     created_ui = pending_params->creator(
@@ -37,21 +31,15 @@ UIFactory_UI* Bico_QWindowThread_UI::ui_factory = nullptr;
 
 Bico_QWindowThread_UI::Bico_QWindowThread_UI(QString obj_name, Bico_QWindowThread* thread, QWidget* parent) : QMainWindow(parent)
 {
-    setObjectName(UI_NAME_PREFIX + obj_name);
-
-    int thread_check = 5;
-    // Check if we're in the main thread
-    QThread* main_thread = QCoreApplication::instance()->thread();
-    QThread* current_thread = QThread::currentThread();
-    thread_check = (current_thread == main_thread);
+    setObjectName(obj_name);
 
     ui_thread_hash_mutex.lock();
-    ui_thread_hash.insert(UI_NAME_PREFIX + obj_name, this);
+    ui_thread_hash.insert(obj_name, this);
     ui_thread_hash_mutex.unlock();
 
     // Connect TERMINATE signal to selfRemove slot for automatic cleanup
     QObject::connect(this, &Bico_QWindowThread_UI::TERMINATE, [obj_name]() {
-        Bico_QWindowThread_UI::selfRemove(UI_NAME_PREFIX + obj_name);
+        Bico_QWindowThread_UI::selfRemove(obj_name);
     });
 
     _thread = thread;
@@ -88,10 +76,8 @@ void Bico_QWindowThread_UI::show()
 
 void Bico_QWindowThread_UI::closeEvent(QCloseEvent *event)
 {
-    event->ignore();
-    emit toThread("terminate", "");
+    // Handle by derived classes if needed 
 }
-
 
 QHash<QString, Bico_QWindowThread_UI *> Bico_QWindowThread_UI::getUIThreadHash()
 {

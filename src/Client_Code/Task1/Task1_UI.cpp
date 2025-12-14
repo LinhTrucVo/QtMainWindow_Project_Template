@@ -2,6 +2,7 @@
 
 void Task1_UI::closeEvent(QCloseEvent *event)
 {
+    // Override close event to handle thread termination
     // Handle the window close event by requesting thread termination
     event->ignore();
     emit toThread("terminate", "");
