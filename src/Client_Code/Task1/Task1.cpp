@@ -8,6 +8,26 @@
 // Initialize static member
 int Task1::count = 0;
 
+Task1::Task1
+(
+    Bico_DataQueue *qin,
+    uint8_t qin_owner,
+    Bico_DataQueue *qout,
+    uint8_t qout_owner,
+    QString obj_name,
+    Bico_QWindowThread_UI *ui,
+    QThread* parent
+) : Bico_QWindowThread(qin, qin_owner, qout, qout_owner, obj_name, ui, parent)
+{
+    // Initialize message handler map
+    message_handlers["terminate"] = &Task1::_handle_terminate;
+    message_handlers["mess_from_ui"] = &Task1::_handle_mess_from_ui;
+    message_handlers["create"] = &Task1::_handle_create;
+    message_handlers["create_child"] = &Task1::_handle_create_child;
+    message_handlers["mess_to_ui"] = &Task1::_handle_mess_to_ui;
+    message_handlers["from_another_thread"] = &Task1::_handle_from_another_thread;
+}
+
 void Task1::cleanupChildren()
 {
     // Get all children from this QObject's children() and terminate them
@@ -41,77 +61,11 @@ uint8_t Task1::MainTask()
         QString mess = input.mess();
         QVariant data = input.data();
 
-        // Don't delete/change this "terminate" case, it is used to terminate safety
-        if (mess == QString("terminate"))
+        // Use the message handler map
+        auto handler_it = message_handlers.find(mess);
+        if (handler_it != message_handlers.end())
         {
-            continue_to_run = 0;
-            cleanupChildren();
-        }
-        else if (mess == QString("mess_from_ui"))
-        {
-            qDebug() << "From UI: " << objectName() << " " << mess << " " << data.value<QString>();
-            emit toUI("change_button_text", QString::number(QRandomGenerator::global()->generate()));
-        }
-        else if (mess == QString("create"))
-        {
-            qDebug() << objectName() << " " << mess;
-            // Create and start a new window thread with its UI (as sibling)
-            count++;
-            QString thread_name = "task_" + QString::number(count);
-            Task1* thread = Bico_QWindowThread::createNew<Task1>
-                    (
-                        new Bico_DataQueue,
-                        1,
-                        new Bico_DataQueue,
-                        1,
-                        thread_name,
-                        Bico_QWindowThread_UI::createNew<Task1_UI>(thread_name)
-                    );
-            Bico_QWindowThread::getThreadHash().value(thread_name)->start();
-            if (thread != nullptr)
-            {
-                thread->start();
-            }
-        }
-        else if (mess == QString("create_child"))
-        {
-            qDebug() << objectName() << " " << mess;
-            // Create and start a new window thread with its UI (as child of this thread)
-            count++;
-            QString thread_name = "child_task_" + QString::number(count);
-            Task1* thread = Bico_QWindowThread::createNew<Task1>
-                    (
-                        new Bico_DataQueue,
-                        1,
-                        new Bico_DataQueue,
-                        1,
-                        thread_name,
-                        Bico_QWindowThread_UI::createNew<Task1_UI>(thread_name),
-                        this
-                    );
-            Bico_QWindowThread::getThreadHash().value(thread_name)->start();
-            if (thread != nullptr)
-            {
-                thread->start();
-            }
-        }
-        else if (mess == QString("mess_to_ui"))
-        {
-            QJsonObject json_obj = QJsonDocument::fromJson(data.value<QString>().toUtf8()).object();
-            emit toUI(json_obj["mess"].toString(), json_obj["data"].toString());
-        }
-        // --------------------------------------------------------------------------------
-        else if (mess == QString("1"))
-        {
-            qDebug() << objectName() << mess << data.value<int>() << "\t" << ex_data_obj.getData_1();
-        }
-        else if (mess == QString("2"))
-        {
-            qDebug() << objectName() << mess << data.value<QString>() << "\t" << ex_data_obj.getData_2();
-        }
-        else if (mess == QString("from_another_thread"))
-        {
-            qDebug() << objectName() << mess << ": "  << input.src() << data.value<int>();
+            continue_to_run = (this->*handler_it.value())(data, input);
         }
     }
 
@@ -143,4 +97,75 @@ uint8_t Task1::MainTask()
     // Test the remove method - end --------------------------------------------------------------
 
     return continue_to_run;
+}
+
+uint8_t Task1::_handle_terminate(QVariant& data, Bico_QMessData& input)
+{
+    cleanupChildren();
+    return 0;  // Signal to stop running
+}
+
+uint8_t Task1::_handle_mess_from_ui(QVariant& data, Bico_QMessData& input)
+{
+    qDebug() << "From UI: " << objectName() << " mess_from_ui " << data.value<QString>();
+    emit toUI("change_button_text", QString::number(QRandomGenerator::global()->generate()));
+    return 1;
+}
+
+uint8_t Task1::_handle_create(QVariant& data, Bico_QMessData& input)
+{
+    qDebug() << objectName() << " create";
+    // Create and start a new window thread with its UI (as sibling)
+    count++;
+    QString thread_name = "task_" + QString::number(count);
+    Task1* thread = Bico_QWindowThread::createNew<Task1>
+            (
+                new Bico_DataQueue,
+                1,
+                new Bico_DataQueue,
+                1,
+                thread_name,
+                Bico_QWindowThread_UI::createNew<Task1_UI>(thread_name)
+            );
+    if (thread != nullptr)
+    {
+        thread->start();
+    }
+    return 1;
+}
+
+uint8_t Task1::_handle_create_child(QVariant& data, Bico_QMessData& input)
+{
+    qDebug() << objectName() << " create_child";
+    // Create and start a new window thread with its UI (as child of this thread)
+    count++;
+    QString thread_name = "child_task_" + QString::number(count);
+    Task1* thread = Bico_QWindowThread::createNew<Task1>
+            (
+                new Bico_DataQueue,
+                1,
+                new Bico_DataQueue,
+                1,
+                thread_name,
+                Bico_QWindowThread_UI::createNew<Task1_UI>(thread_name),
+                this
+            );
+    if (thread != nullptr)
+    {
+        thread->start();
+    }
+    return 1;
+}
+
+uint8_t Task1::_handle_mess_to_ui(QVariant& data, Bico_QMessData& input)
+{
+    QJsonObject json_obj = QJsonDocument::fromJson(data.value<QString>().toUtf8()).object();
+    emit toUI(json_obj["mess"].toString(), json_obj["data"].toString());
+    return 1;
+}
+
+uint8_t Task1::_handle_from_another_thread(QVariant& data, Bico_QMessData& input)
+{
+    qDebug() << objectName() << "from_another_thread: " << input.src() << data.value<int>();
+    return 1;
 }
